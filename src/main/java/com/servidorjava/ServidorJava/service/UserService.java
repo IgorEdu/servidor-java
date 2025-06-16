@@ -5,6 +5,8 @@ import com.servidorjava.ServidorJava.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class UserService {
 
@@ -21,4 +23,10 @@ public class UserService {
 
         return repository.save(user);
     }
+
+    public User get(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
 }
