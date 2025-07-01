@@ -1,0 +1,163 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-07-01T21:10:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_v2_fixed",
+      "parentId": null,
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "name": "API Lista de Tarefas",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_1_reg",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "url": "{{ _.base_url }}/api/usuarios/registrar",
+      "name": "1. Registrar Novo Usuário",
+      "description": "Cria um novo usuário. Utiliza as variáveis de ambiente para email e senha.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"nome\": \"Usuário Teste\",\n\t\"email\": \"{{ _.email }}\",\n\t\"senha\": \"{{ _.senha }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -100,
+      "_type": "request"
+    },
+    {
+      "_id": "req_2_cre",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "url": "{{ _.base_url }}/api/tarefas",
+      "name": "2. Criar Tarefa",
+      "description": "Cria uma nova tarefa para o usuário autenticado.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"descricao\": \"Implementar a API de tarefas\",\n\t\"concluida\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "username": "{{ _.email }}",
+        "password": "{{ _.senha }}"
+      },
+      "metaSortKey": -90,
+      "_type": "request"
+    },
+    {
+      "_id": "req_3_get",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "url": "{{ _.base_url }}/api/tarefas",
+      "name": "3. Listar Minhas Tarefas",
+      "description": "Retorna a lista de tarefas apenas do usuário autenticado.\n\nDepois de executar esta requisição, copie o 'id' de uma das tarefas da resposta e cole na variável de ambiente 'id_tarefa' para poder testar a atualização e a deleção.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "basic",
+        "username": "{{ _.email }}",
+        "password": "{{ _.senha }}"
+      },
+      "metaSortKey": -80,
+      "_type": "request"
+    },
+    {
+      "_id": "req_4_upd",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "url": "{{ _.base_url }}/api/tarefas/{{ _.id_tarefa }}",
+      "name": "4. Atualizar Tarefa",
+      "description": "Atualiza uma tarefa específica. \n\nCertifique-se de que a variável de ambiente 'id_tarefa' contém um ID válido obtido na listagem.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"descricao\": \"API de tarefas implementada e testada!\",\n\t\"concluida\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "basic",
+        "username": "{{ _.email }}",
+        "password": "{{ _.senha }}"
+      },
+      "metaSortKey": -70,
+      "_type": "request"
+    },
+    {
+      "_id": "req_5_del",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "url": "{{ _.base_url }}/api/tarefas/{{ _.id_tarefa }}",
+      "name": "5. Deletar Tarefa",
+      "description": "Deleta uma tarefa específica do usuário.\n\nCertifique-se de que a variável de ambiente 'id_tarefa' contém um ID válido obtido na listagem.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "basic",
+        "username": "{{ _.email }}",
+        "password": "{{ _.senha }}"
+      },
+      "metaSortKey": -60,
+      "_type": "request"
+    },
+    {
+      "_id": "env_v2_fixed",
+      "parentId": "wrk_v2_fixed",
+      "modified": 1678890000000,
+      "created": 1678890000000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "email": "usuario@exemplo.com",
+        "senha": "minhasenha123",
+        "id_tarefa": "1"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "email",
+          "senha",
+          "id_tarefa"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1678890000000,
+      "_type": "environment"
+    }
+  ]
+}
